@@ -146,16 +146,13 @@ export class ShippingConfigureComponent implements OnInit {
     }  else if (type == 'shiprocket') {
       body = { 'code': type, 'active': param.active, 'defaultSelected': param.defaultSelected, 'integrationKeys': {'password': param.password, 'userId': param.userId } }
     } else if (type == 'weightBased') {
-      body = { 'code': type, 'active': param.active, 'defaultSelected': param.defaultSelected, 'integrationKeys': {}, 'integrationOptions': {} }
-    }
-    else if (type == 'customQuotesRules') {
-      body = { 'code': type, 'active': param.active, 'defaultSelected': param.defaultSelected, 'integrationKeys': {}, 'integrationOptions': {} }
-    }
-    else if (type == 'priceByDistance') {
-      body = { 'code': type, 'active': param.active, 'defaultSelected': param.defaultSelected, 'integrationKeys': {}, 'integrationOptions': {} }
-    }
-    else if (type == 'storePickUp') {
-      body = { 'code': type, 'active': param.active, 'defaultSelected': param.defaultSelected, 'integrationKeys': { 'note': param.note, 'price': param.price }, 'integrationOptions': {} }
+      body = { 'code': type, 'active': param.active, 'defaultSelected': param.defaultSelected, 'environment': param.enviroment, 'integrationKeys': {}, 'integrationOptions': {} }
+    } else if (type == 'customQuotesRules') {
+      body = { 'code': type, 'active': param.active, 'defaultSelected': param.defaultSelected, 'environment': param.enviroment,'integrationKeys': {}, 'integrationOptions': {} }
+    } else if (type == 'priceByDistance') {
+      body = { 'code': type, 'active': param.active, 'defaultSelected': param.defaultSelected, 'environment': param.enviroment, 'integrationKeys': {}, 'integrationOptions': {} }
+    } else if (type == 'storePickUp') {
+      body = { 'code': type, 'active': param.active, 'defaultSelected': param.defaultSelected, 'environment': param.enviroment, 'integrationKeys': { 'note': param.note, 'price': param.price }, 'integrationOptions': {} }
     }
     this.saveShippingData(body)
   }
