@@ -26,6 +26,6 @@ export class VariationService {
     return this.crudService.post(`/v2/private/product/variation`, param);
   }
   getListOfVariations(): Observable<any> {
-    return this.crudService.get(`/v2/private/product/variation`);
+    return this.crudService.get(`/v2/private/product/variations`);
   }
 }

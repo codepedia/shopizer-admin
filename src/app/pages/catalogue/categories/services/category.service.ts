@@ -23,7 +23,7 @@ export class CategoryService {
     const params = {
       lang: '_all'
     };
-    return this.crudService.get(`/v1/category/${id}`, params);
+    return this.crudService.get(`/v1/private/category/${id}`, params);
   }
 
   getCategoryByProductId(id): Observable<any> {

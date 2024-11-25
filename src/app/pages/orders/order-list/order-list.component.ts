@@ -22,7 +22,7 @@ export class OrderListComponent implements OnInit {
   selectedStore: String = '';
   // paginator
   perPage = 20;
-  currentPage = 1;
+  currentPage = 0;
   totalCount;
   roles;
   // searchValue: string = '';

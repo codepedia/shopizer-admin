@@ -195,10 +195,11 @@ export class ProductProperties implements OnInit {
 
 
   onClickAdd() {
+    console.log(this.product)
     this.dialogService.open(ProductPropertyForm, {
       context: {
         productId: this.id,
-        productType: this.product.type.code
+        productType: this.product?.type?.code || null
       }
     }).onClose.subscribe(res => {
       this.getList()
