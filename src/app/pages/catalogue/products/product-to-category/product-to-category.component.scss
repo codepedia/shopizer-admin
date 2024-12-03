@@ -25,11 +25,13 @@
             max-width: none !important;
             width: auto;
             height: 40px;
-
+            padding: 8px 10px !important;
+            border-radius: 7px !important;
+            margin-bottom: 0px !important;
             a {
                 padding-left: 15px !important;
                 // color: white;
-                padding-top: 7px;
+                padding-top: 7px !important;
             }
 
             span {

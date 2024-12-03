@@ -49,7 +49,6 @@ export class ProductToCategoryComponent implements OnInit {
             itemsShowLimit: 10,
             allowSearchFilter: true,
             allowRemoteDataSearch: true
-
         };
     }
     loadParams() {
@@ -71,14 +70,14 @@ export class ProductToCategoryComponent implements OnInit {
 
     private load() {
         this.loading = true;
-
+        this.selectedItems = [];
         const p$ = this.categoryService.getCategoryByProductId(this.id)
         const c$ = this.categoryService.getListOfCategories(this.params)
 
         forkJoin([p$, c$])
             .subscribe(([p$, c$]) => {
                 p$.categories.forEach((data) => {
-                    this.selectedItems.push({ 'id': data.id, 'name': data.code })
+                    this.selectedItems.push({ 'id': data.id, 'name': data.description.name })
                 });
                 c$.categories.forEach((value) => {
                     this.getChildren(value);

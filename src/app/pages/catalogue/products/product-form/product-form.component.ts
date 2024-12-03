@@ -228,8 +228,8 @@ export class ProductFormComponent implements OnInit {
       dateAvailable: new Date(this.product.dateAvailable),
       manufacturer: this.product.manufacturer == null ? '' : this.product.manufacturer.code,
       type: this.product.type == null ? '' : this.product.type.code,
-      price: this.product.price,
-      quantity: this.product.quantity,
+      price: this.product.inventory.price,
+      quantity: this.product.inventory.quantity,
       productSpecifications: {
         weight: this.product.productSpecifications.weight,
         height: this.product.productSpecifications.height,

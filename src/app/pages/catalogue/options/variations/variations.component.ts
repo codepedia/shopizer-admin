@@ -90,13 +90,13 @@ export class VariationsListComponent implements OnInit {
             return value.name;
           }
         },
-        values: {
+        optionValue: {
           title: this.translate.instant('COMPONENTS.OPTIONS_VALUE'),
           type: 'string',
           filter: false,
           valuePrepareFunction: (data) => {
             if (data != null) {
-              let value = data.map(a => a.name).join(", ");
+              let value = data?.name;
               return value;
             }
           }
@@ -146,6 +146,6 @@ export class VariationsListComponent implements OnInit {
     }
   }
   onEdit(event) {
-    // this.router.navigate(['/pages/catalogue/options/option-set/' + event.data.id]);
+    this.router.navigate(['/pages/catalogue/options/variations/' + event.data.id]);
   }
 }

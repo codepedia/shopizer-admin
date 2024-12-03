@@ -28,4 +28,9 @@ export class VariationService {
   getListOfVariations(): Observable<any> {
     return this.crudService.get(`/v2/private/product/variations`);
   }
+
+  
+  getVariationsById(variationId, params): Observable<any> {
+    return this.crudService.get(`/v2/private/product/variation/${variationId}`, params);
+  }
 }

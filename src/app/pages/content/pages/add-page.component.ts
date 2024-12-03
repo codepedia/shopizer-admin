@@ -119,7 +119,7 @@ export class AddPageComponent implements OnInit {
       id: [''],
       code: ['', [Validators.required, Validators.pattern(validators.alphanumeric)]],
       visible: [false],
-      mainmenu: [false],
+      linkToMenu: [false],
       order: [0],
       selectedLanguage: [this.defaultLanguage, [Validators.required]],
       descriptions: this.fb.array([]),
@@ -147,7 +147,7 @@ export class AddPageComponent implements OnInit {
       id: this.content.id,
       code: this.content.code,
       visible: this.content.visible,
-      mainmenu: this.content.mainmenu,
+      linkToMenu: this.content.linkToMenu,
       selectedLanguage: this.defaultLanguage,
       descriptions: [],
     });

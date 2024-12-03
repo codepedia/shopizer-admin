@@ -58,15 +58,15 @@ export class AddVariationsComponent implements OnInit {
   ngOnInit() {
     this.loadDefaultParam();
     this.createForm();
-    // const optionId = this.activatedRoute.snapshot.paramMap.get('optionId');
-    // if (optionId) {
-    //   let param = {
-    //     lang: this.storageService.getLanguage(),
-    //     store: this.storageService.getMerchant()
-    //   }
-    //   this.optionService.getOptionSetById(optionId, param)
-    //     .subscribe((res) => {
-
+    const optionId = this.activatedRoute.snapshot.paramMap.get('variationId');
+    if (optionId) {
+      let param = {
+        lang: this.storageService.getLanguage(),
+        store: this.storageService.getMerchant()
+      }
+      this.variationService.getVariationsById(optionId, param)
+        .subscribe((res) => {
+            this.opt = res;
     //       //console.log(JSON.stringify(res));
 
     //       this.option.id = res.id;
@@ -87,14 +87,14 @@ export class AddVariationsComponent implements OnInit {
     //       }
     //       this.option.optionValues = value;
     //       this.option.productTypes = types;
-    //       this.adjustForm();
+          this.adjustForm();
 
-    //     }, error => {
-    //       this.loading = false;
-    //     });
+        }, error => {
+          this.loading = false;
+        });
 
 
-    // }
+    }
     // this.translate.onLangChange.subscribe((lang) => {
     //   this.getOption();
     // });
@@ -232,7 +232,7 @@ export class AddVariationsComponent implements OnInit {
     }
   }
   goToback() {
-    this.router.navigate(['pages/catalogue/options/varations/list']);
+    this.router.navigate(['pages/catalogue/options/variations/list']);
   }
   // setSelected(e) {
   //   //console.log(e)

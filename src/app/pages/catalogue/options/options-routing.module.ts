@@ -59,6 +59,10 @@ const routes: Routes = [
       {
         path: 'variations/add',
         component: AddVariationsComponent
+      },
+      {
+        path: 'variations/:variationId',
+        component: AddVariationsComponent
       }
     ],
   }

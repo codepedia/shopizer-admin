@@ -11,7 +11,7 @@
         nbSpinnerStatus="control" [disabled]="!form.valid">{{ ( !loader ? 'COMMON.SAVE' : '' ) | translate }}</button>-->
       <button type="button" nbButton class="success_button" [nbSpinner]="loading" nbSpinnerSize="large"
         nbSpinnerStatus="control" (click)="save()">
-        {{(!loading?'COMMON.SAVE':'') | translate }} {{ (!loading?'COMMON.SAVE':'') | translate}}
+        {{(!loading?'COMMON.SAVE':'') | translate }}
       </button>
     </div>
   </nb-card-header>
