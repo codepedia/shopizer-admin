@@ -26,7 +26,7 @@ export class OrderDetailsComponent implements OnInit {
   orderDetailsData: any;
   historyListData: Array<any> = [];
   transactionListData: Array<any> = [];
-  statusList: Array<any> = [{ 'name': 'ORDERED', 'id': 'ORDERED' }, { 'name': 'PROCESSED', 'id': 'PROCESSED' }, { 'name': 'DELIVERED', 'id': 'DELIVERED' }, { 'name': 'REFUNDED', 'id': 'REFUNDED' }, { 'name': 'CANCELED', 'id': 'CANCELED' }]
+  statusList: Array<any> = [{ 'name': 'ORDERED', 'id': 'ordered' }, { 'name': 'PROCESSED', 'id': 'processed' }, { 'name': 'DELIVERED', 'id': 'delivered' }, { 'name': 'REFUNDED', 'id': 'refunded' }, { 'name': 'CANCELED', 'id': 'canceled' }]
   public scrollbarOptions = { axis: 'y', theme: 'minimal-dark' };
   info = {
     userName: '',
@@ -193,25 +193,44 @@ export class OrderDetailsComponent implements OnInit {
   onChangeStateShipping(value) {
 
   }
-  updateHistory() {
+  changeStatus() {
     this.loadingList = true;
+    let param = this.statusFields.status
+    this.ordersService.statusChange(this.orderID, param)
+      .subscribe(data => {
+        this.loadingList = false;
+        this.toastr.success("Status has been changed successfully");
+        this.updateHistory()
+        // this.statusFields = {
+        //   comments: '',
+        //   status: ''
+        // }
+
+      }, error => {
+        this.loadingList = false;
+        this.toastr.success("Status has been submitted fail");
+
+      });
+  }
+  updateHistory() {
+    // this.loadingList = true;
     let param = {
       comments: this.statusFields.comments,
       date: moment().format('yyyy-MM-DD'),
-      status: this.statusFields.status
+      status: this.statusFields.status.toUpperCase()
     }
     this.ordersService.addHistory(this.orderID, param)
       .subscribe(data => {
-        this.loadingList = false;
-        this.toastr.success("History Status has been submitted successfully");
+        // this.loadingList = false;
+        // this.toastr.success("History Status has been submitted successfully");
         this.statusFields = {
           comments: '',
           status: ''
         }
 
       }, error => {
-        this.loadingList = false;
-        this.toastr.success("History Status has been submitted fail");
+        // this.loadingList = false;
+        // this.toastr.success("History Status has been submitted fail");
 
       });
   }
@@ -264,17 +283,19 @@ export class OrderDetailsComponent implements OnInit {
     this.router.navigate(['pages/orders/order-list']);
   }
   onClickRefund() {
-    this.loadingList = true;
-    this.ordersService.refundOrder(this.orderID)
-      .subscribe(data => {
-        console.log(data)
-        this.loadingList = false;
-        this.toastr.success("Order has been refunded successfully");
-        // this.shippingStateData = data;
-      }, error => {
-        this.loadingList = false;
-        this.toastr.error("Order has been refunded fail");
-      });
+    this.statusFields.status = 'refunded';
+    this.changeStatus()
+    // this.loadingList = true;
+    // this.ordersService.refundOrder(this.orderID)
+    //   .subscribe(data => {
+    //     console.log(data)
+    //     this.loadingList = false;
+    //     this.toastr.success("Order has been refunded successfully");
+    //     // this.shippingStateData = data;
+    //   }, error => {
+    //     this.loadingList = false;
+    //     this.toastr.error("Order has been refunded fail");
+    //   });
   }
   onClickCapture() {
     this.loadingList = true;

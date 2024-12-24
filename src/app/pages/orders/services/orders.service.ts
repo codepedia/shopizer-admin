@@ -55,4 +55,7 @@ export class OrdersService {
   getTransactions(orderID): Observable<any> {
     return this.crudService.get('/v1/private/orders/' + orderID + '/payment/transactions');
   }
+  statusChange(orderID, param): Observable<any> {
+    return this.crudService.put('/v1/private/orders/' + orderID + '/status', param);
+  }
 }
