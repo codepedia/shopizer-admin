@@ -42,8 +42,8 @@ export class TransferlistboxComponent implements OnInit {
      */
   showDelete: boolean = true;
   constructor(private toastr: ToastrService, private translate: TranslateService, private storageService: StorageService, private sharedService: SharedService) {
-    this.clickEventsubscription = this.sharedService.getClickEvent().subscribe(() => {
-      this.saveShipToCountries();
+    this.clickEventsubscription = this.sharedService.getClickEvent().subscribe((data) => {
+      this.saveShipToCountries(data);
     })
 
     this.clickEventsubscription = this.sharedService.getStoreEvent().subscribe(data => {
@@ -78,14 +78,15 @@ export class TransferlistboxComponent implements OnInit {
 
   // }
   //save shipToCountries
-  saveShipToCountries() {
+  saveShipToCountries(data) {
     let selectedCountries = Array.from(this.rightAreaMap.values());
     selectedCountries.forEach(item => {
       this.shipToCountries.push(item.countryCode);
     });
     let param = {
-      "iternationalShipping": true,
-      "shipToCountry": this.shipToCountries
+      "iternationalShipping": data.expedition,
+      "shipToCountry": this.shipToCountries,
+      "taxOnShipping": data.taxOnShipping
     }
     this.sharedService.saveExpedition(this.store, param)
       .subscribe(data => {

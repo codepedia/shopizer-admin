@@ -13,8 +13,8 @@ export class SharedService {
   private subject = new Subject<any>();
   private subject1 = new Subject<any>();
 
-  sendClickEvent() {
-    this.subject.next();
+  sendClickEvent(data) {
+    this.subject.next(data);
   }
   selectStore(store) {
     this.subject1.next(store);

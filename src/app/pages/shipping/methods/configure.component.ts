@@ -9,6 +9,7 @@ let shiprocketData = require('../services/shiprocket.json');
 let customRulesData = require('../services/customrules.json');
 let storePickUpData = require('../services/storepickup.json');
 let weightBased = require('../services/weightbased.json');
+let uspsData = require('../services/usps.json');
 import { SharedService } from '../services/shared.service';
 
 @Component({
@@ -51,7 +52,6 @@ export class ShippingConfigureComponent implements OnInit {
   }
   ngOnInit() {
     let type = this.activatedRoute.snapshot.paramMap.get('id');
-    console.log(type);
     if (type == 'canadapost') {
       this.formData = canadapost;
       this.shippingType = "Canada Post";
@@ -79,6 +79,10 @@ export class ShippingConfigureComponent implements OnInit {
     else if (type == 'storePickUp') {
       this.formData = storePickUpData;
       this.shippingType = 'Store Pick Up'
+    }
+    else if (type == 'usps') {
+      this.formData = uspsData;
+      this.shippingType = 'USPS'
     }
     this.getShippingConfigureDetails(type)
   }
@@ -125,7 +129,7 @@ export class ShippingConfigureComponent implements OnInit {
     this.formData.map((value) => {
       // console.log(value.value)
       if (value.objectKey === "integrationOptions") {
-        if (value.type == 'radio') {
+        if (value.type == 'radio' || value.type == 'checkbox' || value.type == 'text') {
           param[value.name] = value.value
         } else {
           let a = value.optionData.filter((a) => { return a.checked === true }).map(function (obj) {
@@ -140,19 +144,21 @@ export class ShippingConfigureComponent implements OnInit {
     // console.log(param)
     let body: any = {};
     if (type == "canadapost") {
-      body = { 'code': type, 'active': param.active, 'defaultSelected': param.defaultSelected, 'integrationKeys': { 'account': param.account, 'apikey': param.apikey, 'password': param.password, 'username': param.username }, 'integrationOptions': { 'services-domestic': param['services-domestic'], 'services-intl': param['services-intl'], 'services-usa': param['services-usa'] } }
+      body = { 'code': type, 'active': param.active, 'defaultSelected': param.defaultSelected, 'environment': param.enviroment, 'integrationKeys': { 'account': param.account, 'apikey': param.apikey, 'password': param.password, 'username': param.username }, 'integrationOptions': { 'services-domestic': param['services-domestic'], 'services-intl': param['services-intl'], 'services-usa': param['services-usa'] } }
     } else if (type == 'ups') {
-      body = { 'code': type, 'active': param.active, 'defaultSelected': param.defaultSelected, 'integrationKeys': { 'accessKey': param.accessKey, 'password': param.password, 'userId': param.userId }, 'integrationOptions': { 'packages': [param['packages']], 'selectservice': [param['selectservice']] } }
-    }  else if (type == 'shiprocket') {
-      body = { 'code': type, 'active': param.active, 'defaultSelected': param.defaultSelected, 'integrationKeys': {'password': param.password, 'userId': param.userId } }
+      body = { 'code': type, 'active': param.active, 'defaultSelected': param.defaultSelected, 'environment': param.enviroment, 'integrationKeys': { 'accessKey': param.accessKey, 'password': param.password, 'userId': param.userId }, 'integrationOptions': { 'packages': [param['packages']], 'selectservice': [param['selectservice']] } }
+    } else if (type == 'shiprocket') {
+      body = { 'code': type, 'active': param.active, 'defaultSelected': param.defaultSelected, 'environment': param.enviroment, 'integrationKeys': { 'password': param.password, 'userId': param.userId } }
     } else if (type == 'weightBased') {
       body = { 'code': type, 'active': param.active, 'defaultSelected': param.defaultSelected, 'environment': param.enviroment, 'integrationKeys': {}, 'integrationOptions': {} }
     } else if (type == 'customQuotesRules') {
-      body = { 'code': type, 'active': param.active, 'defaultSelected': param.defaultSelected, 'environment': param.enviroment,'integrationKeys': {}, 'integrationOptions': {} }
+      body = { 'code': type, 'active': param.active, 'defaultSelected': param.defaultSelected, 'environment': param.enviroment, 'integrationKeys': {}, 'integrationOptions': {} }
     } else if (type == 'priceByDistance') {
       body = { 'code': type, 'active': param.active, 'defaultSelected': param.defaultSelected, 'environment': param.enviroment, 'integrationKeys': {}, 'integrationOptions': {} }
     } else if (type == 'storePickUp') {
       body = { 'code': type, 'active': param.active, 'defaultSelected': param.defaultSelected, 'environment': param.enviroment, 'integrationKeys': { 'note': param.note, 'price': param.price }, 'integrationOptions': {} }
+    } else if (type == 'usps') {
+      body = { 'code': type, 'active': param.active, 'defaultSelected': param.defaultSelected, 'environment': param.enviroment, 'integrationKeys': { 'client_id': param.clientId, 'client_secret': param.secretKey }, 'integrationOptions': { 'shippingMethod': param['shippingMethod'], 'packages': param['packages'], 'freeShippingEnabled': param['freeShippingEnabled'], freeShippingPrice: param['freeShippingPrice'], handlingFees: param['handlingFees'], taxOnShipping: param['taxOnShipping'] } }
     }
     this.saveShippingData(body)
   }

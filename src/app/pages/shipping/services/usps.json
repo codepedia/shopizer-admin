@@ -1,0 +1,171 @@
+[
+  {
+    "type": "checkbox",
+    "label": "Enabled",
+    "placeholder": "",
+    "name": "active",
+    "objectKey": "",
+    "isRequired": false,
+    "optionData": [],
+    "value": false
+  },
+  {
+    "type": "checkbox",
+    "label": "Default Shipping Method",
+    "placeholder": "",
+    "name": "defaultSelected",
+    "objectKey": "",
+    "isRequired": false,
+    "optionData": [],
+    "value": false
+  },
+  {
+    "type": "dropdown",
+    "label": "Environment",
+    "placeholder": "Please select environment",
+    "name": "enviroment",
+    "objectKey": "",
+    "isRequired": false,
+    "optionData": [
+      {
+        "id": "test",
+        "label": "Test"
+      },
+      {
+        "id": "prod",
+        "label": "Prod"
+      }
+    ],
+    "value": ""
+  },
+  {
+    "type": "text",
+    "label": "USPS Client ID",
+    "placeholder": "Enter USPS Client ID",
+    "name": "clientId",
+    "objectKey": "integrationKeys",
+    "isRequired": true,
+    "optionData": [],
+    "value": ""
+  },
+  {
+    "type": "text",
+    "label": "USPS Secret Key",
+    "placeholder": "Enter USPS Secret Key",
+    "name": "secretKey",
+    "objectKey": "integrationKeys",
+    "isRequired": true,
+    "optionData": [],
+    "value": ""
+  },
+  {
+    "type": "radio",
+    "label": "Shipping Method",
+    "placeholder": "",
+    "name": "shippingMethod",
+    "objectKey": "integrationOptions",
+    "isRequired": true,
+    "optionData": [
+      {
+        "label": "First Class",
+        "value": "firstClass"
+      },
+      {
+        "label": "Priority Mail",
+        "value": "priorityMail"
+      },
+      {
+        "label": "Priority Mail Express",
+        "value": "priorityMailExpress"
+      },
+      {
+        "label": "Media Mail",
+        "value": "mediaMail"
+      },
+      {
+        "label": "Parcel Select Ground",
+        "value": "parcelSelectGround"
+      },
+      {
+        "label": "USPS Retail Ground",
+        "value": "retailGround"
+      }
+    ],
+    "value": ""
+  },
+  {
+    "type": "radio",
+    "label": "Package Type",
+    "placeholder": "",
+    "name": "packages",
+    "objectKey": "integrationOptions",
+    "isRequired": true,
+    "optionData": [
+      {
+        "label": "Flat Rate Envelope",
+        "value": "flatRateEnvelope"
+      },
+      {
+        "label": "Flat Rate Box",
+        "value": "flatRateBox"
+      },
+      {
+        "label": "Large Flat Rate Box",
+        "value": "largeFlatRateBox"
+      },
+      {
+        "label": "First Class Package",
+        "value": "firstClassPackage"
+      },
+      {
+        "label": "Priority Mail Box",
+        "value": "priorityMailBox"
+      },
+      {
+        "label": "Priority Mail Tube",
+        "value": "priorityMailTube"
+      }
+    ],
+    "value": ""
+  },
+  {
+    "type": "checkbox",
+    "label": "Enable Free Shipping for Orders Over $200",
+    "placeholder": "",
+    "name": "freeShippingEnabled",
+    "objectKey": "integrationOptions",
+    "isRequired": false,
+    "optionData": [],
+    "value": false
+  },
+  {
+    "type": "text",
+    "label": "Free Shipping Minimum Order Total",
+    "placeholder": "Enter amount (e.g., 200)",
+    "name": "freeShippingPrice",
+    "objectKey": "integrationOptions",
+    "isRequired": true,
+    "optionData": [],
+    "value": ""
+  },
+  {
+    "type": "text",
+    "label": "Handling Fees",
+    "placeholder": "Enter handling fee amount",
+    "name": "handlingFees",
+    "objectKey": "integrationOptions",
+    "isRequired": false,
+    "optionData": [],
+    "value": ""
+  },
+  {
+    "type": "checkbox",
+    "label": "Tax on Shipping",
+    "placeholder": "",
+    "name": "taxOnShipping",
+    "objectKey": "integrationOptions",
+    "isRequired": false,
+    "optionData": [],
+    "value": false
+  }
+]
