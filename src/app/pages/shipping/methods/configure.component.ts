@@ -158,7 +158,7 @@ export class ShippingConfigureComponent implements OnInit {
     } else if (type == 'storePickUp') {
       body = { 'code': type, 'active': param.active, 'defaultSelected': param.defaultSelected, 'environment': param.enviroment, 'integrationKeys': { 'note': param.note, 'price': param.price }, 'integrationOptions': {} }
     } else if (type == 'usps') {
-      body = { 'code': type, 'active': param.active, 'defaultSelected': param.defaultSelected, 'environment': param.enviroment, 'integrationKeys': { 'client_id': param.clientId, 'client_secret': param.secretKey }, 'integrationOptions': { 'shippingMethod': param['shippingMethod'], 'packages': param['packages'], 'freeShippingEnabled': param['freeShippingEnabled'], freeShippingPrice: param['freeShippingPrice'], handlingFees: param['handlingFees'], taxOnShipping: param['taxOnShipping'] } }
+      body = { 'code': type, 'active': param.active, 'defaultSelected': param.defaultSelected, 'environment': param.enviroment, 'integrationKeys': { 'client_id': param.clientId, 'client_secret': param.secretKey }, 'integrationOptions': { 'shippingMethod': [param['shippingMethod']], 'packages': [param['packages']], 'freeShippingEnabled': [param['freeShippingEnabled']], freeShippingPrice: [param['freeShippingPrice']], handlingFees: [param['handlingFees']], taxOnShipping: [param['taxOnShipping']] } }
     }
     this.saveShippingData(body)
   }

@@ -52,8 +52,7 @@
                     </nb-checkbox>
                   </div>
                 </div>
-                <div class="
-                        form-group" *ngIf="data.type == 'radio'">
+                <div class="form-group" *ngIf="data.type == 'radio'">
                   <label class="label inputLabel">{{data.label}}<span *ngIf="data.isRequired">*</span></label>
                   <div>
                     <nb-radio-group [(ngModel)]="data.value" name="{{data.name}}">

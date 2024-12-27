@@ -68,27 +68,33 @@
     "optionData": [
       {
         "label": "First Class",
-        "value": "firstClass"
+        "value": "first_class",
+        "checked": false
       },
       {
         "label": "Priority Mail",
-        "value": "priorityMail"
+        "value": "priority_mail",
+        "checked": false
       },
       {
         "label": "Priority Mail Express",
-        "value": "priorityMailExpress"
+        "value": "priority_mail_ex",
+        "checked": false
       },
       {
         "label": "Media Mail",
-        "value": "mediaMail"
+        "value": "media_mail",
+        "checked": false
       },
       {
         "label": "Parcel Select Ground",
-        "value": "parcelSelectGround"
+        "value": "parcel_sg",
+        "checked": false
       },
       {
         "label": "USPS Retail Ground",
-        "value": "retailGround"
+        "value": "retail_ground",
+        "checked": false
       }
     ],
     "value": ""
@@ -103,27 +109,33 @@
     "optionData": [
       {
         "label": "Flat Rate Envelope",
-        "value": "flatRateEnvelope"
+        "value": "flat_re",
+        "checked": false
       },
       {
         "label": "Flat Rate Box",
-        "value": "flatRateBox"
+        "value": "flat_rb",
+        "checked": false
       },
       {
         "label": "Large Flat Rate Box",
-        "value": "largeFlatRateBox"
+        "value": "large_frb",
+        "checked": false
       },
       {
         "label": "First Class Package",
-        "value": "firstClassPackage"
+        "value": "first_cp",
+        "checked": false
       },
       {
         "label": "Priority Mail Box",
-        "value": "priorityMailBox"
+        "value": "priority_mb",
+        "checked": false
       },
       {
         "label": "Priority Mail Tube",
-        "value": "priorityMailTube"
+        "value": "priority_mt",
+        "checked": false
       }
     ],
     "value": ""
