@@ -7,6 +7,7 @@ let moneyorder = require('../services/moneyorder.json');
 let paypalData = require('../services/paypal.json');
 let beanStreamData = require('../services/beanstream.json');
 let stripeData = require('../services/stripe.json');
+let stripe3Data = require('../services/stripe3.json');
 let paytmData = require('../services/paytm.json');
 
 let braintreeData = require('../services/braintree.json');
@@ -57,7 +58,7 @@ export class ConfigureComponent implements OnInit {
   ngOnInit() {
     this.error = null;
     let paymenttype = this.activatedRoute.snapshot.paramMap.get('id');
-     this.paymentType=paymenttype;
+    this.paymentType = paymenttype;
 
     this.formData = [];
 
@@ -76,9 +77,12 @@ export class ConfigureComponent implements OnInit {
     } else if (paymenttype == 'paytm') {
       this.formData = paytmData;
       this.paymentType = "Paytm";
-    }else if (paymenttype == 'braintree') {
+    } else if (paymenttype == 'braintree') {
       this.formData = braintreeData;
       this.paymentType = "Braintree";
+    } else if (paymenttype == 'stripe3') {
+      this.formData = stripe3Data;
+      this.paymentType = "Stripe3";
     }
     this.getPaymentConfigureDetails(paymenttype)
   }
@@ -89,12 +93,12 @@ export class ConfigureComponent implements OnInit {
       .subscribe(data => {
         this.loadingList = false;
         this.paymentData = data;
-        if(data!=null && this.paymentData.length==0) {
+        if (data != null && this.paymentData.length == 0) {
 
         }
         this.setConfigureData();
       }, error => {
-        if(error.status === 404) {// payment not found
+        if (error.status === 404) {// payment not found
           this.error = error;
           this.errorService.error("ERROR.SYSTEM_ERROR_TEXT", 404);
         } else {
@@ -135,15 +139,17 @@ export class ConfigureComponent implements OnInit {
     // console.log(param)
     let body: any = {};
     if (paymenttype == "stripe") {
-      body = { 'code': paymenttype, 'active': param.active, 'defaultSelected': param.defaultSelected, 'integrationKeys': { 'publishableKey': param.publishableKey, 'secretKey': param.secretKey, 'transaction': param.transaction }, 'integrationOptions': null }
+      body = { 'code': paymenttype, 'active': param.active, 'defaultSelected': param.defaultSelected, 'environment': param.enviroment, 'integrationKeys': { 'publishableKey': param.publishableKey, 'secretKey': param.secretKey, 'transaction': param.transaction }, 'integrationOptions': null }
     } else if (paymenttype == 'moneyorder') {
-      body = { 'code': paymenttype, 'active': param.active, 'defaultSelected': param.defaultSelected, 'integrationKeys': { 'address': param.address }, 'integrationOptions': null }
+      body = { 'code': paymenttype, 'active': param.active, 'defaultSelected': param.defaultSelected, 'environment': param.enviroment, 'integrationKeys': { 'address': param.address }, 'integrationOptions': null }
     } else if (paymenttype == 'paypal-express-checkout') {
-      body = { 'code': paymenttype, 'active': param.active, 'defaultSelected': param.defaultSelected, 'integrationKeys': { 'api': param.api, 'signature': param.signature, 'transaction': param.transaction, 'username': param.username }, 'integrationOptions': null }
+      body = { 'code': paymenttype, 'active': param.active, 'defaultSelected': param.defaultSelected, 'environment': param.enviroment, 'integrationKeys': { 'api': param.api, 'signature': param.signature, 'transaction': param.transaction, 'username': param.username }, 'integrationOptions': null }
     } else if (paymenttype == 'braintree') {
-      body = { 'code': paymenttype, 'active': param.active, 'defaultSelected': param.defaultSelected, 'integrationKeys': { 'merchant_id': param.merchant_id, 'public_key': param.public_key, 'private_key': param.private_key, 'tokenization_key': param.tokenization_key, 'transaction': param.transaction }, 'integrationOptions': null }
+      body = { 'code': paymenttype, 'active': param.active, 'defaultSelected': param.defaultSelected, 'environment': param.enviroment, 'integrationKeys': { 'merchant_id': param.merchant_id, 'public_key': param.public_key, 'private_key': param.private_key, 'tokenization_key': param.tokenization_key, 'transaction': param.transaction }, 'integrationOptions': null }
     } else if (paymenttype == 'beanstream') {
-      body = { 'code': paymenttype, 'active': param.active, 'defaultSelected': param.defaultSelected, 'integrationKeys': { 'merchantid': param.merchantid, 'username': param.username, 'password': param.password, 'transaction': param.transaction }, 'integrationOptions': null }
+      body = { 'code': paymenttype, 'active': param.active, 'defaultSelected': param.defaultSelected, 'environment': param.enviroment, 'integrationKeys': { 'merchantid': param.merchantid, 'username': param.username, 'password': param.password, 'transaction': param.transaction }, 'integrationOptions': null }
+    } else if (paymenttype == 'stripe3') {
+      body = { 'code': paymenttype, 'active': param.active, 'defaultSelected': param.defaultSelected, 'environment': param.enviroment, 'integrationKeys': { 'publishableKey': param.publishableKey, 'secretKey': param.secretKey, 'transaction': param.transaction }, 'integrationOptions': null }
     }
     this.savePayment(body);
   }

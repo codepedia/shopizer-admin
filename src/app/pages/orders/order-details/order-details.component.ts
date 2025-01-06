@@ -106,7 +106,7 @@ export class OrderDetailsComponent implements OnInit {
       this.orderID = localStorage.getItem('orderID')
       this.getOrderDetails();
     }
-    this.getHistory();
+    // this.getHistory();
     this.getNextTransaction();
   }
   getNextTransaction() {
@@ -122,17 +122,27 @@ export class OrderDetailsComponent implements OnInit {
     this.ordersService.getHistory(this.orderID)
       .subscribe(data => {
         // console.log(data);
-        this.historyListData = data;
+        // this.historyListData = data;
+        this.dialogService.open(OrderHistoryComponent, {
+          context: {
+            historyData: data
+          },
+        });
       }, error => {
 
       });
-    this.geTransactions()
+    // this.geTransactions()
   }
   geTransactions() {
     this.ordersService.getTransactions(this.orderID)
       .subscribe(data => {
         // console.log(data);
-        this.transactionListData = data;
+        // this.transactionListData = data;
+        this.dialogService.open(OrderTransactionComponent, {
+          context: {
+            transactionData: data,
+          },
+        });
       }, error => {
 
       });
@@ -313,11 +323,12 @@ export class OrderDetailsComponent implements OnInit {
   showDialog(value) {
     // console.log(value)
     if (value == 1) {
-      this.dialogService.open(OrderTransactionComponent, {
-        context: {
-          transactionData: this.transactionListData,
-        },
-      });
+      this.geTransactions()
+      // this.dialogService.open(OrderTransactionComponent, {
+      //   context: {
+      //     transactionData: this.transactionListData,
+      //   },
+      // });
     } else if (value == 2) {
       this.dialogService.open(OrderInvoiceComponent, {
         context: {
@@ -325,11 +336,12 @@ export class OrderDetailsComponent implements OnInit {
         },
       });
     } else if (value == 3) {
-      this.dialogService.open(OrderHistoryComponent, {
-        context: {
-          historyData: this.historyListData
-        },
-      });
+      this.getHistory();
+      // this.dialogService.open(OrderHistoryComponent, {
+      //   context: {
+      //     historyData: this.historyListData
+      //   },
+      // });
     }
   }
 }

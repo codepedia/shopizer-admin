@@ -200,13 +200,14 @@ export class ListComponent implements OnInit {
     console.log('DELETE');
     localStorage.setItem('customerid', null);
     //TODO dialog
-    
-    this.customersService.deleteCustomer(event.data.id,localStorage.getItem('merchant'))
-    .subscribe(data => {
-      this.loadingList = false;
-    }, error => {
-      this.errorService.error('ERROR.SYSTEM_ERROR', error);
-    });
+
+    this.customersService.deleteCustomer(event.data.id, localStorage.getItem('merchant'))
+      .subscribe(data => {
+        this.loadingList = false;
+        this.getCustomers();
+      }, error => {
+        this.errorService.error('ERROR.SYSTEM_ERROR', error);
+      });
     this.errorService.success('COMMON.SUCCESS_REMOVE');
     this.router.navigate(['/pages/customer/list']);
   }

@@ -40,19 +40,9 @@
   },
   {
     "type": "text",
-    "label": "USPS Client ID",
-    "placeholder": "Enter USPS Client ID",
-    "name": "clientId",
-    "objectKey": "integrationKeys",
-    "isRequired": true,
-    "optionData": [],
-    "value": ""
-  },
-  {
-    "type": "text",
-    "label": "USPS Secret Key",
-    "placeholder": "Enter USPS Secret Key",
-    "name": "secretKey",
+    "label": "USPS User ID",
+    "placeholder": "Enter USPS User ID",
+    "name": "account",
     "objectKey": "integrationKeys",
     "isRequired": true,
     "optionData": [],
@@ -67,33 +57,38 @@
     "isRequired": true,
     "optionData": [
       {
-        "label": "First Class",
-        "value": "first_class",
-        "checked": false
-      },
-      {
         "label": "Priority Mail",
-        "value": "priority_mail",
+        "value": "PRIORITY",
         "checked": false
       },
       {
         "label": "Priority Mail Express",
-        "value": "priority_mail_ex",
+        "value": "EXPRESS",
+        "checked": false
+      },
+      {
+        "label": "First-Class Mail",
+        "value": "FIRST CLASS",
         "checked": false
       },
       {
         "label": "Media Mail",
-        "value": "media_mail",
+        "value": "MEDIA",
         "checked": false
       },
       {
-        "label": "Parcel Select Ground",
-        "value": "parcel_sg",
+        "label": "Parcel Select",
+        "value": "PARCEL SELECT",
         "checked": false
       },
       {
-        "label": "USPS Retail Ground",
-        "value": "retail_ground",
+        "label": "USPS Ground Advantage",
+        "value": "USPS GROUND ADVANTAGE",
+        "checked": false
+      },
+      {
+        "label": "All available services for the request",
+        "value": "ALL",
         "checked": false
       }
     ],
@@ -108,76 +103,36 @@
     "isRequired": true,
     "optionData": [
       {
+        "label": "Rectangular",
+        "value": "RECTANGULAR",
+        "checked": false
+      },
+      {
+        "label": "Irregular",
+        "value": "NONRECTANGULAR",
+        "checked": false
+      },
+      {
+        "label": "Variable Sized",
+        "value": "VARIABLE",
+        "checked": false
+      },
+      {
         "label": "Flat Rate Envelope",
-        "value": "flat_re",
+        "value": "FLAT RATE ENVELOPE",
         "checked": false
       },
       {
         "label": "Flat Rate Box",
-        "value": "flat_rb",
+        "value": "FLAT RATE BOX",
         "checked": false
       },
       {
         "label": "Large Flat Rate Box",
-        "value": "large_frb",
-        "checked": false
-      },
-      {
-        "label": "First Class Package",
-        "value": "first_cp",
-        "checked": false
-      },
-      {
-        "label": "Priority Mail Box",
-        "value": "priority_mb",
-        "checked": false
-      },
-      {
-        "label": "Priority Mail Tube",
-        "value": "priority_mt",
+        "value": "LARGE FLAT RATE BOX",
         "checked": false
       }
     ],
     "value": ""
-  },
-  {
-    "type": "checkbox",
-    "label": "Enable Free Shipping for Orders Over $200",
-    "placeholder": "",
-    "name": "freeShippingEnabled",
-    "objectKey": "integrationOptions",
-    "isRequired": false,
-    "optionData": [],
-    "value": false
-  },
-  {
-    "type": "text",
-    "label": "Free Shipping Minimum Order Total",
-    "placeholder": "Enter amount (e.g., 200)",
-    "name": "freeShippingPrice",
-    "objectKey": "integrationOptions",
-    "isRequired": true,
-    "optionData": [],
-    "value": ""
-  },
-  {
-    "type": "text",
-    "label": "Handling Fees",
-    "placeholder": "Enter handling fee amount",
-    "name": "handlingFees",
-    "objectKey": "integrationOptions",
-    "isRequired": false,
-    "optionData": [],
-    "value": ""
-  },
-  {
-    "type": "checkbox",
-    "label": "Tax on Shipping",
-    "placeholder": "",
-    "name": "taxOnShipping",
-    "objectKey": "integrationOptions",
-    "isRequired": false,
-    "optionData": [],
-    "value": false
   }
 ]
