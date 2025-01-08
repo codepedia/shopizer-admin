@@ -28,9 +28,13 @@ export class VariationService {
   getListOfVariations(): Observable<any> {
     return this.crudService.get(`/v2/private/product/variations`);
   }
-
-  
   getVariationsById(variationId, params): Observable<any> {
     return this.crudService.get(`/v2/private/product/variation/${variationId}`, params);
+  }
+  deleteVariations(variationId): Observable<any> {
+    return this.crudService.delete(`/v2/private/product/variation/${variationId}`);
+  }
+  updateVariations(variationId, params): Observable<any> {
+    return this.crudService.put(`/v2/private/product/variation/${variationId}`, params);
   }
 }

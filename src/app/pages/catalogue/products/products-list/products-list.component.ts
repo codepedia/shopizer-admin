@@ -58,7 +58,7 @@ export class ProductsListComponent implements OnInit {
       lang: this.storageService.getLanguage(),
       count: this.perPage,
       origin: "admin", //does not load attributes in listing
-      page: 0
+      startPage: 0
     };
   }
 
@@ -124,7 +124,7 @@ export class ProductsListComponent implements OnInit {
 
   getList() {
     const startFrom = this.currentPage - 1;
-    this.params.page = startFrom;
+    this.params.startPage = startFrom;
     this.fetchTableData();
     this.setSettings();
   }

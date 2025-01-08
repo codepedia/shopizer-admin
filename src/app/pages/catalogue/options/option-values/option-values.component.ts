@@ -21,6 +21,7 @@ export class OptionValuesComponent implements OnInit {
   loadingInfo: boolean = false;
   optionValue = new OptionValue();
   languages = [];
+  defaultLanguage = localStorage.getItem('lang');
   types = [
     'Select', 'Radio', 'Checkbox', 'Text'
   ];
@@ -37,20 +38,36 @@ export class OptionValuesComponent implements OnInit {
     private router: Router,
     private optionValueImageService: OptionValueImageService
   ) {
-    this.languages = [...this.configService.languages];
+    // this.languages = [...this.configService.languages];
   }
 
   ngOnInit() {
     const optionValueId = this.activatedRoute.snapshot.paramMap.get('optionValueId');
     this.createForm();
-    if (optionValueId) {
-      this.loader = true;
-      this.optionValuesService.getOptionValueById(optionValueId).subscribe(res => {
-        this.optionValue = res;
-        this.fillForm();
-        this.loader = false;
-      });
-    }
+    this.configService.getListOfSupportedLanguages(localStorage.getItem('merchant'))
+       .subscribe(res => {
+        console.log(res)
+        this.languages = res;
+        this.addFormArray();
+        if (optionValueId) {
+          this.optionValuesService.getOptionValueById(optionValueId).subscribe(res => {
+            this.optionValue = res;
+            this.fillForm();
+            this.loader = false;
+          });
+        } else {
+          this.loader=false;
+        }
+        
+    });
+    // if (optionValueId) {
+    //   this.loader = true;
+    //   this.optionValuesService.getOptionValueById(optionValueId).subscribe(res => {
+    //     this.optionValue = res;
+    //     this.fillForm();
+    //     this.loader = false;
+    //   });
+    // }
   }
 
   get selectedLanguage() {
@@ -68,14 +85,15 @@ export class OptionValuesComponent implements OnInit {
   private createForm() {
     this.form = this.fb.group({
       code: ['', [Validators.required, Validators.pattern(validators.alphanumeric)]],
-      selectedLanguage: ['en'],
+      selectedLanguage: [this.defaultLanguage, [Validators.required]],
       descriptions: this.fb.array([])
     });
-    this.addFormArray();
+    // this.addFormArray();
   }
 
   addFormArray() {
     const control = <FormArray>this.form.controls.descriptions;
+    console.log(this.languages)
     this.languages.forEach(lang => {
       control.push(
         this.fb.group({
@@ -89,7 +107,7 @@ export class OptionValuesComponent implements OnInit {
   fillForm() {
     this.form.patchValue({
       code: this.optionValue.code,
-      selectedLanguage: 'en',
+      selectedLanguage: this.defaultLanguage,
     });
     this.fillFormArray();
   }
@@ -116,6 +134,7 @@ export class OptionValuesComponent implements OnInit {
   }
 
   onImageChanged(event) {
+    console.log(event.type)
     switch (event.type) {
       case 'add': {
         this.uploadImage = new FormData();
@@ -140,10 +159,12 @@ export class OptionValuesComponent implements OnInit {
         if (this.uploadImage.get('file')) {
           this.optionValueImageService.createImage(this.optionValue.id, this.uploadImage).subscribe(r => {
             this.toastr.success(this.translate.instant('OPTION_VALUE.OPTION_VALUE_UPDATED'));
+            this.router.navigate(['pages/catalogue/options/options-values-list']);
           });
         } else {
           this.optionValueImageService.deleteImage(this.optionValue.id).subscribe(r => {
             this.toastr.success(this.translate.instant('OPTION_VALUE.OPTION_VALUE_UPDATED'));
+            this.router.navigate(['pages/catalogue/options/options-values-list']);
           });
         }
       });

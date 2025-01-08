@@ -69,24 +69,11 @@ export class AddVariationsComponent implements OnInit {
             this.opt = res;
     //       //console.log(JSON.stringify(res));
 
-    //       this.option.id = res.id;
-    //       this.option.code = res.code;
-    //       this.option.option = res.option.id;
-    //       this.option.readOnly = res.readOnly;
-    //       let value = []
-    //       let types = []
-    //       if (res.values) {
-    //         res.values.map((optionValue) => {
-    //           value.push(optionValue.id)
-    //         });
-    //       }
-    //       if (res.productTypes) {
-    //         res.productTypes.map((productType) => {
-    //           types.push(productType.id)
-    //         });
-    //       }
-    //       this.option.optionValues = value;
-    //       this.option.productTypes = types;
+          this.opt.id = res.id;
+          this.opt.code = res.code;
+          this.opt.option = res.option.id;
+          this.opt.optionValue = res.optionValue.id;
+         
           this.adjustForm();
 
         }, error => {
@@ -185,45 +172,23 @@ export class AddVariationsComponent implements OnInit {
 
 
   save() {
-    console.log(this.form.value);
     this.loading = true;
-    // //console.log(this.options)
-
-    // this.isValidCode = true;
-    // this.isValidOption = true;
-
-    // let optionObj = this.form.value;
-    // optionObj.optionValues = this.option.optionValues;
-    // optionObj.productTypes = this.option.productTypes;
-
-    // //console.log('From object values ' + JSON.stringify(optionObj));
-
-    // if (this.form.invalid) {
-    //   if (this.code.invalid) {
-    //     this.isValidCode = false;
-    //   }
-    //   if (this.opt.invalid) {
-    //     this.isValidOption = false;
-    //   }
-    //   this.loading = false;
-    //   return;
-    // }
-
     if (this.opt.id) {
+      const optionObj = { ...this.form.value, id: this.opt.id, code: this.opt.code };
+      this.variationService.updateVariations(this.opt.id, optionObj)
+        .subscribe((res) => {
+          this.toastr.success(this.translate.instant('VARIATION.CREATED'));
+          this.goToback();
+          this.loading = false;
+        }, error => {
+          this.loading = false;
+        });
 
-      //   this.optionService.updateSetOption(this.option.id, optionObj)
-      //     .subscribe((res) => {
-      //       this.toastr.success(this.translate.instant('OPTION.SET_OPTION_UPDATED'));
-      //       this.loading = false;
-      //     }, error => {
-      //       this.loading = false;
-      //     });
-
-    }
+      }
     else {
       this.variationService.addVariations(this.form.value)
         .subscribe((res) => {
-          this.toastr.success(this.translate.instant('OPTION.SET_OPTION_CREATED'));
+          this.toastr.success(this.translate.instant('VARIATION.UPDATED'));
           this.goToback();
           this.loading = false;
         }, error => {

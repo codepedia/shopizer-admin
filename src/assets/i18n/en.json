@@ -344,6 +344,10 @@
     "SET_OPTION_CREATED": "Option set has been created.",
     "SET_OPTION_UPDATED": "Option set has been updated."
   },
+  "VARIATION": {
+    "CREATED": "Variation has been created successfully.",
+    "UPDATED": "Variation has been updated successfully"
+  },
   "OPTION_VALUE": {
     "OPTION_VALUE": "Option value",
     "OPTION_VALUE_NAME": "Option value name",

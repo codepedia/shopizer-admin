@@ -117,21 +117,21 @@ export class VariationsListComponent implements OnInit {
   }
 
   deleteRecord(event) {
-    //console.log(event);
-    // this.dialogService.open(ShowcaseDialogComponent, {})
-    //   .onClose.subscribe(res => {
-    //     if (res) {
-    //       // event.confirm.resolve();
-    //       this.optionService.deleteOptionSet(event.data.id)
-    //         .subscribe(result => {
-    //           this.toastr.success(this.translate.instant('OPTION.SET_OPTION_REMOVED'));
-    //           this.getList();
-    //         });
-    //     } else {
-    //       //TODO generic error page
-    //       // event.confirm.reject();
-    //     }
-    //   });
+    console.log(event);
+    this.dialogService.open(ShowcaseDialogComponent, {})
+      .onClose.subscribe(res => {
+        if (res) {
+          // event.confirm.resolve();
+          this.variationService.deleteVariations(event.data.id)
+            .subscribe(result => {
+              this.toastr.success(this.translate.instant('OPTION.SET_OPTION_REMOVED'));
+              this.getList();
+            });
+        } else {
+          //TODO generic error page
+          // event.confirm.reject();
+        }
+      });
   }
 
 
@@ -140,7 +140,7 @@ export class VariationsListComponent implements OnInit {
       case 'edit':
         this.onEdit(event);
         break;
-      case 'remove':
+      case 'delete':
         this.deleteRecord(event)
         break
     }

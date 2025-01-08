@@ -234,6 +234,7 @@ export class OptionSetComponent implements OnInit {
       this.optionService.updateSetOption(this.option.id, optionObj)
         .subscribe((res) => {
           this.toastr.success(this.translate.instant('OPTION.SET_OPTION_UPDATED'));
+          this.goToback();
           this.loading = false;
         }, error => {
           this.loading = false;
