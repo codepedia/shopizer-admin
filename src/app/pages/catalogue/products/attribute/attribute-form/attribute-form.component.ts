@@ -25,8 +25,8 @@ export class AttributeFormComponent implements OnInit {
   form: FormGroup;
   loading = false;
 
-  options = [];
-  optionValues = [];
+  options = [{ value: '', label: 'Please select options' }];
+  optionValues = [{ value: '', label: 'Please select option values' }];
 
   currency = '';
 
@@ -53,8 +53,8 @@ export class AttributeFormComponent implements OnInit {
         optionValueRes.optionValues.forEach((optionValue) => {
           this.optionValues.push({ value: optionValue.code, label: optionValue.code });
         });
-        this.options.push({ value: '', label: 'Please select options' });
-        this.optionValues.push({ value: '', label: 'Please select option values' });
+        // this.options.push({ value: '', label: 'Please select options' });
+        // this.optionValues.push({ value: '', label: 'Please select option values' });
       });
   };
 
