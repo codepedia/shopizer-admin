@@ -162,7 +162,13 @@ export class TaxRateListComponent implements OnInit {
         },
         taxClass: {
           title: this.translate.instant('TAX.TAX_CLASS_NAME'),
-          type: 'string'
+          type: 'string',
+          valuePrepareFunction: (value) => {
+            console.log(value)
+            if (value) {
+              return value.name;
+            }
+          }
         }
       }
     };

@@ -93,6 +93,7 @@ export class TaxRateAddComponent implements OnInit {
 
         this.formValue = data;
         this.formValue.name = data.description.name
+        this.formValue.taxClass = data.taxClass.name
         this.onCountryChange(data.country)
       }, error => {
         this.loadingList = false;
