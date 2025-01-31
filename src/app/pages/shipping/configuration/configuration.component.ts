@@ -47,7 +47,7 @@ export class ConfigurationComponent {
     const store = localStorage.getItem('merchant');
     forkJoin([this.sharedService.getExpedition(this.selectedStore), this.storeService.getListOfMerchantStoreNames({ 'store': '' }), this.sharedService.getCountry()])
       .subscribe(([expedition, stores, countries]) => {
-
+        this.stores = [];
         this.getCountry(countries);
         this.expedition = expedition.iternationalShipping
         this.taxOnShipping = expedition.taxOnShipping

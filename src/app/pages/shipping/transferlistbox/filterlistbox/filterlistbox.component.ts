@@ -37,7 +37,7 @@ export class FilterlistboxComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.itemStateChanged.subscribe((response: any, data) => {
-      if (data.componentId == this.cid) {
+      if (response.componentId == this.cid) {
         this.inputRef.nativeElement.checked = false;
         this.activedescendentItem = null;
       }

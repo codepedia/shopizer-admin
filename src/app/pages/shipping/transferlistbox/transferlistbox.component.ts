@@ -79,7 +79,9 @@ export class TransferlistboxComponent implements OnInit {
   // }
   //save shipToCountries
   saveShipToCountries(data) {
+    this.shipToCountries = [];
     let selectedCountries = Array.from(this.rightAreaMap.values());
+    console.log(selectedCountries)
     selectedCountries.forEach(item => {
       this.shipToCountries.push(item.countryCode);
     });
@@ -187,6 +189,7 @@ export class TransferlistboxComponent implements OnInit {
         ++counter;
       }
     });
+    console.log(this.rightAreaMap)
     this.updateMessage(this.rightAreaLabel, this.leftAreaLabel, counter);
     this.toggleButtonClicked.emit({ "componentId": this.rightAreaId });
   }
